@@ -1,6 +1,6 @@
-# Dockerized Logstash cookbook
+# Dockerized Curator cookbook
 
-This cookbooks sets up a basic Logstash configuration, ready to be
+This cookbooks sets up a basic Curator configuration, ready to be
 invoked using a Docker Compose configuration file, or manually by
 invoking the `docker` command and setting up volumes and port forwarding
 using the command line.
@@ -25,15 +25,13 @@ Depends on `elasticsearch` cookbook, version `~>0.0.1`.
 
 ## Attributes
 
-- `node["logstash"]["dir"]` - directory where Logstash keeps its
-  configuration and data, default: `~/logstash`
-- `node["logstash"]["port"]` - port used for communication,
-  default: `5000`
+- `node["curator"]["dir"]` - directory where Curator keeps its
+  configuration and data, default: `~/curator`
 
 
 ## Recipes
 
-One recipe provided for invocation: `logstash::default`.
+One recipe provided for invocation: `curator::default`.
 
 
 ## License and Maintainer

@@ -8,9 +8,10 @@ inside a Vagrant box, provisioned by Chef and Kitchen.
 
 - [x] Elasticsearch
 - [x] Logstash
-- [ ] Kibana
-- [ ] Curator
+- [x] Kibana
+- [x] Curator
 - [ ] Maintenance scripts
+- [ ] rsyslog forwarder
 
 
 # License

@@ -13,4 +13,9 @@ end
 # Create the configuration file from a template
 template "#{node["logstash"]["dir"]}/conf/logstash.conf" do
   source "logstash.conf.erb"
+  variables({
+    logstash_port:      node["logstash"]["port"],
+    elasticsearch_host: node["elasticsearch"]["hostname"],
+    elasticsearch_port: node["elasticsearch"]["port_api"]
+  })
 end

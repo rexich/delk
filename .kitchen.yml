@@ -13,3 +13,5 @@ suites:
     run_list:
       - recipe[elasticsearch]
       - recipe[logstash]
+      - recipe[curator]
+      - recipe[kibana]

@@ -1,6 +1,6 @@
-# Dockerized Logstash cookbook
+# Dockerized Kibana cookbook
 
-This cookbooks sets up a basic Logstash configuration, ready to be
+This cookbooks sets up a basic Kibana configuration, ready to be
 invoked using a Docker Compose configuration file, or manually by
 invoking the `docker` command and setting up volumes and port forwarding
 using the command line.
@@ -9,7 +9,6 @@ using the command line.
 ## Requirements
 
 The latest Docker (and preferably Docker Compose) must be installed.
-Elasticsearch Docker image tagged with version `5` must be installed.
 
 
 ### Platform
@@ -25,15 +24,15 @@ Depends on `elasticsearch` cookbook, version `~>0.0.1`.
 
 ## Attributes
 
-- `node["logstash"]["dir"]` - directory where Logstash keeps its
-  configuration and data, default: `~/logstash`
-- `node["logstash"]["port"]` - port used for communication,
-  default: `5000`
+- `node["kibana"]["dir"]` - directory where Kibana keeps
+  its configuration, data, and logs, default: `~/elasticsearch`
+- `node["kibana"]["port"]` - port used for server communication,
+  default: `5601`
 
 
 ## Recipes
 
-One recipe provided for invocation: `logstash::default`.
+One recipe provided for invocation: `kibana::default`.
 
 
 ## License and Maintainer

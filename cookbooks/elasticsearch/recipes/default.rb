@@ -14,4 +14,7 @@ end
 # Generate the configuration file from a template
 template "#{node["elasticsearch"]["dir"]}/conf/elasticsearch.yml" do
   source "elasticsearch.yml.erb"
+  variables({
+    min_master_nodes: node["elasticsearch"]["minimum_master_nodes"]
+  })
 end

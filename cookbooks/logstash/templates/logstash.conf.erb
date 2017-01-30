@@ -1,0 +1,15 @@
+input {
+    tcp {
+        port => <%= node["logstash"]["port"] %>
+    }
+    udp {
+        port => <%= node["logstash"]["port"] %>
+    }
+}
+
+output {
+    elasticsearch {
+        hosts => "<%= node["elasticsearch"]["hostname"] %>:<%= node["elasticsearch"]["port_api"] %>"
+    }
+    stdout {}
+}

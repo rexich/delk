@@ -31,6 +31,8 @@ Depends on `docker` cookbook, version `~>1.12`.
   default: `9200`
 - `node["elasticsearch"]["port_clusters"]` - port used for communicating
   with other clusters, default: `9300`
+- `node["elasticsearch"]["minimum_master_nodes"]` - minimum number of
+  nodes that can be masters on the same cluster, default: `1`
 
 
 ## Recipes
@@ -41,5 +43,5 @@ One recipe provided for invocation: `elasticsearch::default`.
 ## License and Maintainer
 
 Maintainer: Filip Dimovski <rexich at riseup dot net>
-License: MIT
 
+License: MIT

@@ -15,4 +15,6 @@ Log format:
 - Change log, for better version and change tracking
 - Elasticstack cookbook (complete)
 - Logstash cookbook (complete)
+- Curator cookbook (complete)
+- Kibana cookbook (complete)
 - Add more information about DELK in `README.md`

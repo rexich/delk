@@ -1,0 +1,20 @@
+{
+    "name": "delk",
+    "description": "Sets up a complete Docker and ELK stack",
+    "chef_type": "role",
+    "json_class": "Chef::Role",
+    "default_attributes": {
+      "delk_user": "vagrant",
+      "delk_net": "delk"
+    },
+    "override_attributes": {
+    },
+    "run_list": [
+        "recipe[docker]",
+        "recipe[elasticsearch]",
+        "recipe[logstash]",
+        "recipe[curator]",
+        "recipe[kibana]",
+        "recipe[post-setup]"
+    ]
+}

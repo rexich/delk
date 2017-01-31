@@ -11,5 +11,4 @@ platforms:
 suites:
   - name: default
     run_list:
-      - recipe[elasticsearch]
-      - recipe[logstash]
+      - role[delk]

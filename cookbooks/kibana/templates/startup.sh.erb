@@ -3,7 +3,7 @@
 # Wait for Elasticsearch to be ready before starting Kibana.
 echo "Waiting for Elasticsearch to come online..."
 while true; do
-    nc -q 1 <%= node["elasticsearch"]["hostname"] %> <%= node["elasticsearch"]["port_api"] %> 2>/dev/null && break
+    nc -q 1 <%= @elasticsearch_host %> <%= @elasticsearch_port %> 2>/dev/null && break
 done
 
 echo "Elasticsearch is up and running. Starting Kibana..."

@@ -1,5 +1,5 @@
 # Kibana is served by a back end server. This setting specifies the port to use.
-server.port: <%= node["kibana"]["port"] %>
+server.port: <%= @kibana_port %>
 
 # This setting specifies the IP address of the back end server.
 server.host: "0.0.0.0"
@@ -15,7 +15,7 @@ server.host: "0.0.0.0"
 # server.name: "your-hostname"
 
 # The URL of the Elasticsearch instance to use for all your queries.
-elasticsearch.url: "http://<%= node["elasticsearch"]["hostname"] %>:<%= node["elasticsearch"]["port_api"] %>"
+elasticsearch.url: "http://<%= @elasticsearch_host %>:<%= @elasticsearch_port %>"
 
 # When this setting’s value is true Kibana uses the hostname specified in the server.host
 # setting. When the value of this setting is false, Kibana uses the hostname of the host

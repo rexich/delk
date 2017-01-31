@@ -1,0 +1,64 @@
+version: '2'
+
+services:
+  # Elasticseach microservice definition
+  elasticsearch:
+    # Directory containing the Dockerfile
+    build: elasticsearch/
+    # Map ports between the host machine and the Docker instance:
+    # Port 9200 - access to Elasticsearch API
+    # Port 9300 - cluster communication
+    ports:
+      - "<%= @elasticsearch_port_api %>:<%= @elasticsearch_port_api %>"
+      - "<%= @elasticsearch_port_clusters %>:<%= @elasticsearch_port_clusters %>"
+    # Elasticseach requires lots of heap memory for high performance.
+    # The underlying library is Lucene, and the library's data is stored
+    # as a set of immutable files, cached by the Linux kernel in the
+    # unused RAM buffers. Let Elasticseach use 50% of RAM for its heap,
+    # leave the rest for Lucene to increase speed; or: ES_HEAP_SIZE=1g
+    environment:
+      ES_JAVA_OPTS: "-Xms1g -Xmx1g"
+    # This container is on the same Docker network as the others
+    # so they can communicate between each other
+    networks:
+      - <%= @docker_network_name %>
+    # Share the data and configuration directories/files using volumes
+    volumes:
+      - ./elasticsearch/data:/usr/share/elasticsearch/data
+      - ./elasticsearch/conf:/usr/share/elasticsearch/conf
+      - ./elasticsearch/logs:/usr/share/elasticsearch/logs
+  # Logstash microservice definition
+  logstash:
+    # Directory containing the Dockerfile
+    build: logstash/
+    # Override the default configuration directory
+    command: -f /etc/logstash/conf.d/
+    # The configuration files are stored in a mapped volume
+    volumes:
+      - ./logstash/conf:/etc/logstash/conf.d
+    # Map this port so we can send the rsyslog from host to Logstash
+    ports:
+      - "<%= @logstash_port %>:<%= @logstash_port %>"
+    # Put this container on the same Docker network as the others
+    # so they can communicate between each other
+    networks:
+      - <%= @docker_network_name %>
+  # Kibana microservice definition
+  kibana:
+    build: kibana/
+    # Volume for Kibana's configuration files
+    volumes:
+      - ./kibana/config/:/opt/kibana/config/
+    # Ports for accessing Kibana
+    # (open http://localhost:5601 in your browser to see it)
+    ports:
+      - "<%= @kibana_port %>:<%= @kibana_port %>"
+    # Put this container on the same Docker network as the others
+    # so they can communicate between each other
+    networks:
+      - <%= @docker_network_name %>
+
+# One common network for the microservices to communicate together
+networks:
+  <%= @docker_network_name %>:
+    driver: bridge

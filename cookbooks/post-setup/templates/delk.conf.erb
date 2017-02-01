@@ -1,0 +1,19 @@
+description "DELK container automatic start-up"
+author "Filip Dimovski <rexich at riseup dot net>"
+
+start on runlevel [2345]
+stop on shutdown
+expect daemon
+
+chdir <%= @delk_dir %>
+exec /usr/local/bin/docker-compose up -d
+
+pre-start script
+  echo $$ > /var/run/delk.pid
+  echo "[`date`] Starting DELK" >> /var/log/delk.log
+end script
+
+pre-stop script
+  rm /var/run/delk.pid
+  echo "[`date`] Stopping DELK" >> /var/log/delk.log
+end script

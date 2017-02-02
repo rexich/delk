@@ -10,7 +10,7 @@ inside a Vagrant box, provisioned by Chef and Kitchen.
 - [x] Logstash
 - [x] Kibana
 - [x] Curator
-- [x]Maintenance scripts
+- [x] Maintenance scripts
 - [x] rsyslog forwarder
 
 

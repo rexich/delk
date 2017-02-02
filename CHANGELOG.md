@@ -10,7 +10,7 @@ Log format:
 - Description of a change
 ```
 
-## [Unreleased], work in progress]
+## Version 0.1
 ### Added
 - Change log, for better version and change tracking
 - Elasticstack cookbook (complete)
@@ -18,3 +18,5 @@ Log format:
 - Curator cookbook (complete)
 - Kibana cookbook (complete)
 - Add more information about DELK in `README.md`
+- Write Serverspec tests
+- Confirm everything works by performing the tests - all pass locally

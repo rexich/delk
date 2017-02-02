@@ -12,9 +12,9 @@
     "run_list": [
         "recipe[docker]",
         "recipe[elasticsearch]",
-        "recipe[logstash]",
         "recipe[curator]",
         "recipe[kibana]",
+        "recipe[logstash]",
         "recipe[post-setup]"
     ]
 }

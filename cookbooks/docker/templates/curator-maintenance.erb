@@ -1,4 +1,0 @@
-# Run Curator to clean up the Elasticsearch indices from older data
-# every first Sunday of every month, at midnight.
-
-00 09 * * 7 [ $(date +\%d) -le 07 ] && /usr/bin/curator --config <%= @curator_dir %>/config.yml <%= @curator_dir %>/actions.yml

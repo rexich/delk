@@ -1,14 +1,13 @@
 # Recipe for Kibana
 
-# Create its directory
-directory "#{node["kibana"]["dir"]}" do
-  owner node["delk_user"]
-  group node["delk_user"]
-end
+# Create directories
+directory "#{node["kibana"]["dir"]}"
 
-directory "#{node["kibana"]["dir"]}/conf" do
-  owner node["delk_user"]
-  group node["delk_user"]
+node["kibana"]["all_dirs"].each do |dir|
+  directory "#{node["kibana"]["dir"]}/#{dir}" do
+    owner node["delk_user"]
+    group node["delk_user"]
+  end
 end
 
 
@@ -40,4 +39,10 @@ template "#{node["kibana"]["dir"]}/startup.sh" do
     elasticsearch_host: node["elasticsearch"]["hostname"],
     elasticsearch_port: node["elasticsearch"]["port_api"]
   })
+end
+
+
+# Pull the Docker image
+execute "pull-docker-kibana-image" do
+  command "sudo docker pull kibana:5"
 end

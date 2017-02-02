@@ -51,3 +51,9 @@ service "delk" do
   provider Chef::Provider::Service::Upstart
   action [:enable, :start]
 end
+
+
+# Wait a bit for Elasticsearch microservice to start
+execute "wait-for-elasticsearch" do
+  command "sleep 5"
+end

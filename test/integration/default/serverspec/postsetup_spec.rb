@@ -41,3 +41,11 @@ end
     it { should be_running }
   end
 end
+
+
+# Check if ports are open
+%w( 5000 5601 9200 9300 ).each do |p|
+  describe port(p) do
+      it { should be_listening }
+  end
+end

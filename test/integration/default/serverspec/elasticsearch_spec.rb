@@ -7,7 +7,9 @@ set :backend, :exec
 
 
 # Check directories' ownership
-%w( . conf data logs ).each do |dir|
+# Except data/ and logs/, they are owned by root when Docker Compose
+# starts the services, so we have to ignore them
+%w( . conf ).each do |dir|
   describe file("#{HOME_DIR}/elasticsearch/#{dir}") do
     it { should be_directory }
     it { should be_owned_by DELK_USER }

@@ -11,15 +11,8 @@ end
 
 
 # Install Docker Engine and prerequisite packages
-apt_package "docker-engine" do
-  package_name [
-    "curl",
-    "linux-image-extra-#{node['docker']['kernel_release']}",
-    "linux-image-extra-virtual",
-    "apt-transport-https",
-    "ca-certificates",
-    "docker-engine"
-  ]
+node["docker"]["dependencies"].each do |dep|
+  apt_package dep
 end
 
 
@@ -33,7 +26,7 @@ end
 
 # Get Docker Compose and install it
 execute "get-docker-compose" do
-  command 'curl -L https://github.com/docker/compose/releases/download/1.10.0/docker-compose-Linux-x86_64 -o /usr/local/bin/docker-compose'
+  command "curl -L https://github.com/docker/compose/releases/download/#{node["docker"]["compose_version"]}/docker-compose-Linux-x86_64 -o /usr/local/bin/docker-compose"
   creates "/usr/local/bin/docker-compose"
 end
 

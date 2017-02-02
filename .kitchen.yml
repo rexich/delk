@@ -1,6 +1,11 @@
 ---
 driver:
   name: vagrant
+  customize:
+    memory: 2048
+    cpus: 2
+  network:
+    - ["forwarded_port", { guest: 5601, host: 5601 }]
 
 provisioner:
   name: chef_solo

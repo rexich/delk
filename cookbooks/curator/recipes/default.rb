@@ -1,22 +1,16 @@
 # Recipe for Curator
 
 # Add APT key and repository
-execute "add-apt-key" do
-  command "wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -"
-  action :nothing
-end
-
-file "/etc/apt/sources.list.d/curator.list" do
-  content "deb http://packages.elastic.co/curator/4/debian stable main"
-  notifies :run, "execute[add-apt-key]", :immediately
+apt_repository "curator" do
+  uri "http://packages.elastic.co/curator/4/debian"
+  distribution "stable"
+  components ["main"]
+  key "https://packages.elastic.co/GPG-KEY-elasticsearch"
+  action :add
 end
 
 
 # Install Curator package
-apt_update "update-cache" do
-  action :update
-end
-
 apt_package "elasticsearch-curator"
 
 

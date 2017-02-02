@@ -1,19 +1,13 @@
-# Logstash recipe
+# Recipe for Logstash
 
 # Create directories
-directory "#{node["logstash"]["dir"]}" do
-  owner node["delk_user"]
-  group node["delk_user"]
-end
+directory "#{node["logstash"]["dir"]}"
 
-directory "#{node["logstash"]["dir"]}/conf" do
-  owner node["delk_user"]
-  group node["delk_user"]
-end
-
-directory "#{node["logstash"]["dir"]}/data" do
-  owner node["delk_user"]
-  group node["delk_user"]
+node["logstash"]["all_dirs"].each do |dir|
+  directory "#{node["logstash"]["dir"]}/#{dir}" do
+    owner node["delk_user"]
+    group node["delk_user"]
+  end
 end
 
 
@@ -34,4 +28,10 @@ template "#{node["logstash"]["dir"]}/conf/logstash.conf" do
     elasticsearch_host: node["elasticsearch"]["hostname"],
     elasticsearch_port: node["elasticsearch"]["port_api"]
   })
+end
+
+
+# Pull the Docker image
+execute "pull-docker-logstash-image" do
+  command "sudo docker pull logstash:5"
 end

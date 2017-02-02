@@ -1,24 +1,13 @@
 # Recipe for Elasticsearch
 
 # Create directories
-directory "#{node["elasticsearch"]["dir"]}" do
-  owner node["delk_user"]
-  group node["delk_user"]
-end
+directory "#{node["elasticsearch"]["dir"]}"
 
-directory "#{node["elasticsearch"]["dir"]}/conf" do
-  owner node["delk_user"]
-  group node["delk_user"]
-end
-
-directory "#{node["elasticsearch"]["dir"]}/data" do
-  owner node["delk_user"]
-  group node["delk_user"]
-end
-
-directory "#{node["elasticsearch"]["dir"]}/logs" do
-  owner node["delk_user"]
-  group node["delk_user"]
+node["elasticsearch"]["all_dirs"].each do |dir|
+  directory "#{node["elasticsearch"]["dir"]}/#{dir}" do
+    owner node["delk_user"]
+    group node["delk_user"]
+  end
 end
 
 
@@ -55,4 +44,10 @@ file "/etc/sysctl.d/99-increase-max-map-count.conf" do
   owner "root"
   group "root"
   notifies :run, "execute[reload-sysctl]", :immediately
+end
+
+
+# Pull the Docker image
+execute "pull-elasticsearch-docker-image" do
+  command "sudo docker pull elasticsearch:5"
 end
